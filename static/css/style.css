@@ -1396,18 +1396,244 @@ body[data-theme="light"] .section-kicker {
 }
 
 @media (max-width: 768px) {
-  .barber-top-content { margin-top: -48px; padding: 0 1rem; }
+  html {
+    scroll-padding-top: 78px;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .navbar {
+    padding: 0.65rem 0;
+  }
+
+  .navbar .container-fluid {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .navbar-brand {
+    font-size: 1.45rem;
+    letter-spacing: 2px;
+  }
+
+  .navbar-collapse {
+    margin-top: 0.75rem;
+    padding: 0.75rem 0;
+    border-top: 1px solid rgba(224, 231, 255, 0.12);
+  }
+
+  .nav-link {
+    margin-left: 0;
+    padding: 0.75rem 0.25rem;
+    font-size: 0.9rem;
+  }
+
+  .theme-toggle {
+    width: 100%;
+    margin: 0.75rem 0 0;
+  }
+
+  body > .container-fluid {
+    padding-left: 0.85rem !important;
+    padding-right: 0.85rem !important;
+  }
+
+  .featured-top {
+    margin-bottom: 2rem;
+  }
+
+  .featured-top .barber-cover {
+    height: 170px;
+  }
+
+  .barber-top-content {
+    margin-top: -28px;
+    padding: 0 0.5rem;
+  }
+
   .featured-summary { align-items: flex-start; flex-direction: column; gap: 0.75rem; }
   .featured-summary > div { padding-top: 0; }
-  .featured-avatar { width: 88px; height: 88px; }
+  .featured-summary h1 {
+    font-size: 1.75rem;
+  }
+
+  .featured-summary .lead {
+    font-size: 0.98rem;
+  }
+
+  .featured-summary .small {
+    max-width: none;
+    font-size: 0.88rem;
+  }
+
+  .featured-avatar { width: 86px; height: 86px; }
+
+  .rating-overview {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+    width: 100%;
+  }
+
+  .rating-overview div {
+    min-width: 0;
+    padding: 0.6rem 0.7rem;
+  }
+
+  .hero {
+    padding: 2.5rem 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .hero h1 {
+    font-size: 2.05rem;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .hero-highlights {
+    justify-content: stretch;
+  }
+
+  .hero-highlights span {
+    width: 100%;
+    font-size: 0.8rem;
+  }
+
+  .one-page-content {
+    max-width: 100%;
+  }
+
+  .page-section {
+    scroll-margin-top: 78px;
+    padding-top: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  h2 {
+    font-size: 1.45rem;
+    margin: 1.4rem 0 1rem;
+  }
+
+  .section-intro p {
+    font-size: 0.94rem;
+    line-height: 1.65;
+  }
+
   .barber-profile-header { margin-top: -52px; }
   .barber-profile-header .col-md-9 { padding-top: 0.75rem; }
   .profile-avatar { width: 104px; height: 104px; }
   .shop-overview { grid-template-columns: 1fr; }
   .service-showcase { grid-template-columns: 1fr; }
+
+  .service-showcase div,
+  .service-item,
+  .team-card,
+  .about-card,
+  .address-card,
+  .review-form-section,
+  .reviews-list {
+    padding: 1rem;
+  }
+
+  .service-header {
+    padding: 1rem;
+    gap: 0.75rem;
+  }
+
+  .service-header-content h5,
+  .team-header h5 {
+    font-size: 1rem;
+  }
+
+  .service-meta,
+  .team-role {
+    font-size: 0.8rem;
+  }
+
+  .compact-calendar-panel {
+    max-width: 100%;
+    padding: 0.75rem;
+  }
+
   .availability-header { flex-direction: column; }
   .calendar-shell { grid-template-columns: 1fr; }
   .calendar-month { overflow-x: auto; }
   .calendar-weekdays,
-  .calendar-cells { min-width: 560px; }
+  .calendar-cells { min-width: 480px; }
+
+  .calendar-controls {
+    grid-template-columns: 32px 1fr 32px;
+  }
+
+  .calendar-nav-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .calendar-cell {
+    min-height: 62px;
+  }
+
+  .time-chip {
+    font-size: 0.5rem;
+  }
+
+  .day-availability-card {
+    min-height: 0;
+  }
+
+  form {
+    max-width: none;
+    margin: 1.25rem 0;
+  }
+
+  .btn-book {
+    width: 100%;
+    padding: 0.7rem 1rem;
+  }
+
+  .featured-book-btn,
+  .featured-summary .btn-outline-secondary {
+    width: auto;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .map-container iframe {
+    height: 280px;
+  }
+}
+
+@media (max-width: 420px) {
+  .featured-top .barber-cover {
+    height: 145px;
+  }
+
+  .featured-summary h1 {
+    font-size: 1.55rem;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .calendar-weekdays,
+  .calendar-cells {
+    min-width: 430px;
+  }
+
+  .review-card .review-header,
+  .review-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
 }
