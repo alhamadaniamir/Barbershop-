@@ -1,3 +1,4 @@
+
 # Barbershop — simple Flask web app
 
 Quick start
@@ -16,3 +17,5 @@ python3 app.py
 Open http://127.0.0.1:5000 in your browser.
 
 Appointments are stored in `appointments.db` in the project folder.
+# Barbershop-
+>>>>>>> 92305046df1373c3e0afa59485251a05793d7e63
