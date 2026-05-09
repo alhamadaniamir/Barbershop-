@@ -13,10 +13,10 @@ app.config['DATABASE'] = str(DATABASE)
 TEAM_MEMBERS = [
     {
         "id": 1,
-        "name": "Francis",
-        "role": "Owner & Master Barber",
-        "bio": "20+ years of barbering excellence. Specializes in classic cuts, fades, and traditional shaves. Francis brings passion and precision to every cut.",
-        "email": "francis@barbershop.com",
+        "name": "TUPI CDO",
+        "role": "Classic Cuts Barbershop",
+        "bio": "A reliable Cagayan de Oro barbershop focused on clean haircuts, sharp fades, beard care, and a comfortable grooming experience for every customer.",
+        "email": "tupicdo@barbershop.com",
         "phone": "(555) 123-4567",
         "social": {
             "instagram": "https://instagram.com",
@@ -48,7 +48,7 @@ SAMPLE_REVIEWS = [
     {
         "name": "Miguel Santos",
         "rating": 5,
-        "comment": "Francis gave me one of the cleanest fades I have ever had. The haircut looked sharp, the lines were even, and the whole experience felt professional from start to finish.",
+        "comment": "TUPI CDO gave me one of the cleanest fades I have ever had. The haircut looked sharp, the lines were even, and the whole experience felt professional from start to finish.",
         "barber_id": 1,
         "created_at": "Sample review"
     },

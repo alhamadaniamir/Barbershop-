@@ -93,6 +93,12 @@ body a:not(.btn):not(.nav-link):hover {
   transform: translateY(0) scale(0.96);
 }
 
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
 .nav-link {
   margin-left: 1.6rem;
   font-size: 1rem;
@@ -112,7 +118,6 @@ body a:not(.btn):not(.nav-link):hover {
 }
 
 .theme-toggle {
-  margin-left: 1rem;
   border: 1px solid #475569;
   background: transparent;
   color: #f8fafc;
@@ -1287,8 +1292,8 @@ h2 {
 }
 
 body[data-theme="light"] {
-  background: #f8fafc;
-  color: #0f172a;
+  background: #eef2f6;
+  color: #182230;
 }
 
 body[data-theme="light"] p,
@@ -1302,51 +1307,63 @@ body[data-theme="light"] small,
 body[data-theme="light"] label,
 body[data-theme="light"] strong,
 body[data-theme="light"] span,
+body[data-theme="light"] li,
 body[data-theme="light"] .lead,
 body[data-theme="light"] .text-muted,
 body[data-theme="light"] .form-label,
 body[data-theme="light"] .table td,
 body[data-theme="light"] .table th {
-  color: #0f172a !important;
+  color: #182230 !important;
 }
 
 body[data-theme="light"] a:not(.btn):not(.nav-link) {
-  color: #0f172a;
+  color: #1e3a5f;
 }
 
 body[data-theme="light"] a:not(.btn):not(.nav-link):hover {
-  color: #334155;
+  color: #0f172a;
 }
 
 body[data-theme="light"] .navbar {
-  background: rgba(248, 250, 252, 0.96);
-  border-bottom-color: #cbd5e1;
+  background: rgba(238, 242, 246, 0.96);
+  border-bottom-color: #b9c4d0;
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
 }
 
 body[data-theme="light"] .navbar-brand,
 body[data-theme="light"] .nav-link,
 body[data-theme="light"] .theme-toggle {
+  color: #182230 !important;
+}
+
+body[data-theme="light"] .navbar-brand:hover,
+body[data-theme="light"] .navbar-brand:focus {
   color: #0f172a !important;
+  text-shadow: 0 0 14px rgba(30, 58, 95, 0.18);
 }
 
 body[data-theme="light"] .nav-link:hover,
 body[data-theme="light"] .theme-toggle:hover,
 body[data-theme="light"] .theme-toggle:focus {
-  background: #0f172a;
+  background: #182230;
   color: #f8fafc !important;
 }
 
+body[data-theme="light"] .navbar-toggler {
+  border-color: #94a3b8;
+}
+
 body[data-theme="light"] .navbar-toggler-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(15,23,42,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(24,34,48,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
 body[data-theme="light"] .hero,
 body[data-theme="light"] .service-card,
 body[data-theme="light"] .service-item,
-body[data-theme="light"] .service-header,
-body[data-theme="light"] .service-details,
 body[data-theme="light"] .team-card,
+body[data-theme="light"] .team-info,
+body[data-theme="light"] .team-booking,
+body[data-theme="light"] .about-section,
 body[data-theme="light"] .about-card,
 body[data-theme="light"] .address-card,
 body[data-theme="light"] .review-form-section,
@@ -1363,14 +1380,17 @@ body[data-theme="light"] .shop-overview p,
 body[data-theme="light"] .shop-overview div,
 body[data-theme="light"] .rating-overview div,
 body[data-theme="light"] .service-showcase div {
-  background: #ffffff;
-  border-color: #cbd5e1;
+  background: #dce8f5;
+  border-color: #94a8bf;
+  box-shadow: 0 10px 24px rgba(31, 47, 71, 0.1);
 }
 
 body[data-theme="light"] .hero {
-  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
+  background: linear-gradient(135deg, #e9f0f8 0%, #cbdced 100%);
 }
 
+body[data-theme="light"] .service-header,
+body[data-theme="light"] .service-details,
 body[data-theme="light"] .calendar-title,
 body[data-theme="light"] .calendar-weekdays span,
 body[data-theme="light"] .calendar-controls button,
@@ -1378,10 +1398,39 @@ body[data-theme="light"] .calendar-cell.selected,
 body[data-theme="light"] .calendar-cell.has-slots:hover,
 body[data-theme="light"] .calendar-cell.has-slots:focus,
 body[data-theme="light"] .form-control,
-body[data-theme="light"] .form-select {
-  background: #f1f5f9;
-  color: #0f172a;
-  border-color: #cbd5e1;
+body[data-theme="light"] .form-select,
+body[data-theme="light"] .table,
+body[data-theme="light"] .table thead {
+  background: #cddbeb;
+  color: #182230;
+  border-color: #94a8bf;
+}
+
+body[data-theme="light"] .calendar-cell.empty {
+  background: #e4ebf2;
+}
+
+body[data-theme="light"] .btn-book {
+  background: #182230;
+  border-color: #182230;
+  color: #f8fafc;
+  box-shadow: 0 4px 12px rgba(24, 34, 48, 0.18);
+}
+
+body[data-theme="light"] .btn-book:hover {
+  background: #26364b;
+  border-color: #26364b;
+  color: #f8fafc;
+}
+
+body[data-theme="light"] .btn-outline-secondary {
+  color: #182230;
+  border-color: #94a3b8;
+}
+
+body[data-theme="light"] .btn-outline-secondary:hover {
+  background: #d8e1eb;
+  color: #182230;
 }
 
 body[data-theme="light"] .featured-top .barber-cover img {
@@ -1391,8 +1440,86 @@ body[data-theme="light"] .featured-top .barber-cover img {
 body[data-theme="light"] .featured-summary h1,
 body[data-theme="light"] .featured-summary .small,
 body[data-theme="light"] .hero-kicker,
-body[data-theme="light"] .section-kicker {
-  color: #0f172a !important;
+body[data-theme="light"] .section-kicker,
+body[data-theme="light"] .review-comment,
+body[data-theme="light"] .review-date,
+body[data-theme="light"] .service-meta,
+body[data-theme="light"] .team-role,
+body[data-theme="light"] .duration,
+body[data-theme="light"] .price {
+  color: #182230 !important;
+}
+
+body[data-theme="light"] .time-chip.available,
+body[data-theme="light"] .detail-slot.available {
+  background: rgba(22, 101, 52, 0.12);
+  color: #14532d !important;
+}
+
+body[data-theme="light"] .time-chip.occupied,
+body[data-theme="light"] .detail-slot.occupied {
+  background: rgba(185, 28, 28, 0.12);
+  color: #7f1d1d !important;
+}
+
+body[data-theme="light"] #team,
+body[data-theme="light"] #about,
+body[data-theme="light"] #team p,
+body[data-theme="light"] #team h2,
+body[data-theme="light"] #team h5,
+body[data-theme="light"] #team span,
+body[data-theme="light"] #team strong,
+body[data-theme="light"] #team .info-row,
+body[data-theme="light"] #about p,
+body[data-theme="light"] #about h2,
+body[data-theme="light"] #about h4,
+body[data-theme="light"] #about h5,
+body[data-theme="light"] #about li,
+body[data-theme="light"] #about strong {
+  color: #111827 !important;
+}
+
+body[data-theme="light"] .team-card,
+body[data-theme="light"] .about-card,
+body[data-theme="light"] .about-section {
+  background: #d7e5f3;
+  border-color: #8098b3;
+}
+
+body[data-theme="light"] .team-header,
+body[data-theme="light"] .hours-list li,
+body[data-theme="light"] .values-list li {
+  border-color: #aab7c5;
+}
+
+body[data-theme="light"] .team-info,
+body[data-theme="light"] .team-booking {
+  background: #c6d8ea;
+  border-color: #8098b3;
+}
+
+body[data-theme="light"] .team-booking {
+  border-left-color: #31445d;
+}
+
+body[data-theme="light"] .team-role,
+body[data-theme="light"] .team-bio,
+body[data-theme="light"] .team-booking p,
+body[data-theme="light"] .about-section .lead,
+body[data-theme="light"] .about-card p,
+body[data-theme="light"] .hours-list li,
+body[data-theme="light"] .values-list li {
+  color: #1f2937 !important;
+}
+
+body[data-theme="light"] .info-row a {
+  color: #123456 !important;
+  font-weight: 700;
+}
+
+body[data-theme="light"] #team .btn-book,
+body[data-theme="light"] #about .btn-book {
+  color: #f8fafc !important;
 }
 
 @media (max-width: 768px) {
@@ -1431,8 +1558,9 @@ body[data-theme="light"] .section-kicker {
   }
 
   .theme-toggle {
-    width: 100%;
-    margin: 0.75rem 0 0;
+    margin: 0;
+    padding: 0.4rem 0.65rem;
+    font-size: 0.72rem;
   }
 
   body > .container-fluid {
@@ -1563,9 +1691,9 @@ body[data-theme="light"] .section-kicker {
 
   .availability-header { flex-direction: column; }
   .calendar-shell { grid-template-columns: 1fr; }
-  .calendar-month { overflow-x: auto; }
+  .calendar-month { overflow-x: visible; }
   .calendar-weekdays,
-  .calendar-cells { min-width: 480px; }
+  .calendar-cells { min-width: 0; }
 
   .calendar-controls {
     grid-template-columns: 32px 1fr 32px;
@@ -1577,11 +1705,28 @@ body[data-theme="light"] .section-kicker {
   }
 
   .calendar-cell {
-    min-height: 62px;
+    min-height: 48px;
+    padding: 0.2rem;
+  }
+
+  .calendar-date {
+    margin-bottom: 0;
+    font-size: 0.68rem;
+  }
+
+  .calendar-times {
+    display: flex;
+    gap: 0.14rem;
+    margin-top: 0.18rem;
   }
 
   .time-chip {
-    font-size: 0.5rem;
+    width: 7px;
+    height: 7px;
+    overflow: hidden;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 0;
   }
 
   .day-availability-card {
@@ -1627,7 +1772,20 @@ body[data-theme="light"] .section-kicker {
 
   .calendar-weekdays,
   .calendar-cells {
-    min-width: 430px;
+    min-width: 0;
+  }
+
+  .compact-calendar-panel {
+    padding: 0.55rem;
+  }
+
+  .calendar-weekdays span {
+    font-size: 0.5rem;
+    padding: 0.25rem 0.05rem;
+  }
+
+  .calendar-cell {
+    min-height: 42px;
   }
 
   .review-card .review-header,
