@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center py-5">
+  <h2 style="color: #000; border: none; margin-bottom: 1rem;">✓ BOOKED</h2>
+  <div class="alert alert-success">
+    Thank you, <strong>{{ name }}</strong>. Your appointment has been confirmed.
+  </div>
+  <p><a href="{{ url_for('index') }}" class="btn btn-outline-secondary">Back Home</a></p>
+</div>
+{% endblock %}

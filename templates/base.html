@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Barbershop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid px-4">
+        <a class="navbar-brand" href="{{ url_for('index') }}#top">BARBER</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}#services">Services</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}#team">Team</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}#gallery">Gallery</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}#reviews">Reviews</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}#address">Address</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}#booking">Book</a></li>
+          </ul>
+          <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Switch color theme">
+            <span id="theme-toggle-label">Light</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid px-4">
+      {% block content %}{% endblock %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.querySelectorAll('#navbarNav .nav-link').forEach((link) => {
+        link.addEventListener('click', () => {
+          const navbar = document.getElementById('navbarNav');
+          if (navbar.classList.contains('show')) {
+            bootstrap.Collapse.getOrCreateInstance(navbar).hide();
+          }
+        });
+      });
+
+      const applyTheme = (theme) => {
+        document.body.dataset.theme = theme;
+        localStorage.setItem('barber-theme', theme);
+        document.getElementById('theme-toggle-label').textContent = theme === 'light' ? 'Dark' : 'Light';
+      };
+
+      const savedTheme = localStorage.getItem('barber-theme') || 'dark';
+      applyTheme(savedTheme);
+
+      document.getElementById('theme-toggle').addEventListener('click', () => {
+        applyTheme(document.body.dataset.theme === 'light' ? 'dark' : 'light');
+      });
+    </script>
+  </body>
+</html>

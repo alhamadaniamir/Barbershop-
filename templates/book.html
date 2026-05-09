@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>BOOK YOUR CUT</h2>
+{% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+<form method="post">
+  <div class="mb-3">
+    <label class="form-label">Full Name</label>
+    <input class="form-control" type="text" name="name" value="{{ form.name if form else '' }}" placeholder="John Doe" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Phone</label>
+    <input class="form-control" type="tel" name="phone" value="{{ form.phone if form else '' }}" placeholder="(555) 123-4567" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Service</label>
+    <select class="form-select" name="service" required>
+      <option value="">— Select a service —</option>
+      {% for id, label in services %}
+      <option value="{{ id }}" {% if form and form.service==id %}selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Date & Time</label>
+    <input type="datetime-local" class="form-control" name="datetime" value="{{ form.datetime if form else '' }}" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Special Requests</label>
+    <textarea class="form-control" name="notes" placeholder="Any special notes..."></textarea>
+  </div>
+  <button class="btn btn-book w-100" type="submit">CONFIRM BOOKING</button>
+</form>
+{% endblock %}

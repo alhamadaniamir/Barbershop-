@@ -1,0 +1,459 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="top"></div>
+<div class="featured-top">
+  <div class="barber-cover">
+    <img src="{{ url_for('static', filename='images/' + featured.cover) }}" alt="cover">
+  </div>
+  <div class="container barber-top-content">
+    <div class="featured-summary">
+      <img src="{{ url_for('static', filename='images/' + featured.image) }}" alt="avatar" class="featured-avatar">
+      <div>
+        <h1>{{ featured.name }}</h1>
+        <p class="lead text-muted">{{ featured.role }}</p>
+        <p class="text-muted small mt-2">{{ featured.bio }}</p>
+        <div class="rating-overview">
+          <div>
+            <strong>{{ featured_stats.average }}/5</strong>
+            <span>Average rating</span>
+          </div>
+          <div>
+            <strong>{{ featured_stats.count }}</strong>
+            <span>Customer reviews</span>
+          </div>
+          <div>
+            <strong>{{ featured_stats.five_star }}</strong>
+            <span>Five-star cuts</span>
+          </div>
+        </div>
+        <div class="mt-2">
+          <a href="{{ url_for('barber_profile', barber_id=featured.id) }}" class="btn btn-outline-secondary btn-sm">View Profile</a>
+          <a href="#booking" class="btn btn-book btn-sm featured-book-btn">Book</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-3">
+      <h6 style="color:#e0e7ff;">Recent Reviews</h6>
+      {% if featured_reviews %}
+        {% for r in featured_reviews %}
+        <div class="small review-item mb-2">
+          <strong>{{ r.name }}</strong> — {% for i in range(r.rating) %}⭐{% endfor %}
+          <div class="text-muted">{{ r.comment }}</div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <p class="text-muted small">No reviews yet for {{ featured.name }}.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="hero-content">
+    <span class="hero-kicker">Clean cuts. Sharp details. Confident finish.</span>
+    <h1>CLASSIC CUTS</h1>
+    <p>Step in for a haircut that feels personal, polished, and easy to maintain. From clean fades and textured styles to beard shaping and line-ups, every service is handled with careful consultation, steady hands, and attention to the details that make the cut look fresh after you leave the chair.</p>
+    <div class="hero-highlights">
+      <span>Detailed consultation</span>
+      <span>Sharp fades and line-ups</span>
+      <span>Comfortable grooming experience</span>
+    </div>
+    <a href="#booking" class="btn btn-book">Book an Appointment</a>
+  </div>
+</div>
+
+<div class="container one-page-content">
+  <section id="services" class="page-section">
+    <div class="section-intro">
+      <span class="section-kicker">Services made for everyday confidence</span>
+      <h2>OUR SERVICES</h2>
+      <p>Choose a grooming service that fits your style, schedule, and occasion. Whether you need a quick clean-up, a sharp fade, beard detailing, or a full cut-and-beard package, each service is focused on clean lines, balanced shape, and a finish that still looks good after you leave the shop.</p>
+    </div>
+
+    <div class="service-showcase">
+      <div>
+        <strong>Clean Haircuts</strong>
+        <span>Tailored cuts shaped around your hair type, face shape, and preferred style.</span>
+      </div>
+      <div>
+        <strong>Sharp Beard Work</strong>
+        <span>Careful trims, line-ups, and shaping for a polished, well-groomed look.</span>
+      </div>
+      <div>
+        <strong>Reliable Booking</strong>
+        <span>Simple appointments with clear service times so your visit feels easy.</span>
+      </div>
+    </div>
+
+    <div class="services-accordion">
+      {% for service in services %}
+      <div class="service-item mb-3">
+        <div class="service-header" data-bs-toggle="collapse" data-bs-target="#service-{{ service.id }}">
+          <div class="service-header-content">
+            <h5>{{ service.name }}</h5>
+            <span class="service-meta">{{ service.duration }} • {{ service.price }}</span>
+          </div>
+          <span class="service-toggle">+</span>
+        </div>
+        <div class="collapse" id="service-{{ service.id }}">
+          <div class="service-details">
+            <p>{{ service.description }}</p>
+            <a href="#booking" class="btn btn-book btn-sm">Book This Service</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="availability-panel compact-calendar-panel">
+      <div class="availability-header">
+        <div>
+          <h5>Booking Availability</h5>
+          <p>Green slots are open. Red slots are already occupied.</p>
+        </div>
+        <div class="availability-legend">
+          <span><i class="legend-dot available"></i>Available</span>
+          <span><i class="legend-dot occupied"></i>Occupied</span>
+        </div>
+      </div>
+      <div class="calendar-shell">
+        <div class="calendar-controls">
+          <button type="button" class="calendar-nav-btn" id="calendar-prev" aria-label="Previous month">‹</button>
+          <div class="calendar-title" id="calendar-title"></div>
+          <button type="button" class="calendar-nav-btn" id="calendar-next" aria-label="Next month">›</button>
+        </div>
+        <div class="calendar-month">
+          <div class="calendar-weekdays" id="calendar-weekdays"></div>
+          <div class="calendar-cells" id="calendar-cells"></div>
+        </div>
+        <div class="day-availability-card" id="day-availability">
+          <strong>Select a day</strong>
+          <p>Click a date with time slots to see daily availability.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="team" class="page-section">
+    <h2>OUR TEAM</h2>
+    <p class="text-muted mb-4">Meet the masters behind every cut</p>
+
+    <div class="row g-4">
+      {% for member in team %}
+      <div class="col-md-6">
+        <div class="team-card">
+          <div class="team-header">
+            <h5>{{ member.name }}</h5>
+            <span class="team-role">{{ member.role }}</span>
+          </div>
+          <p class="team-bio">{{ member.bio }}</p>
+
+          <div class="team-info">
+            <div class="info-row">
+              <strong>Email:</strong> <a href="mailto:{{ member.email }}">{{ member.email }}</a>
+            </div>
+            <div class="info-row">
+              <strong>Phone:</strong> <a href="tel:{{ member.phone }}">{{ member.phone }}</a>
+            </div>
+          </div>
+
+          <div class="team-booking">
+            <strong>Booking Policy:</strong>
+            <p>{{ member.booking_policy }}</p>
+          </div>
+
+          <a href="#booking" class="btn btn-book btn-sm mt-3">Book with {{ member.name }}</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section id="gallery" class="page-section">
+    <h2>GALLERY</h2>
+    <p class="text-muted mb-4">Check out our latest cuts and styles</p>
+
+    {% if images %}
+    <div class="gallery-grid">
+      {% for image in images %}
+      <div class="gallery-item">
+        <img src="{{ url_for('static', filename='uploads/' + image.filename) }}" alt="{{ image.title or 'Gallery image' }}" class="gallery-image">
+        {% if image.title %}
+        <p class="gallery-title">{{ image.title }}</p>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-5">
+      <p class="text-muted">Gallery coming soon! Check back for our latest work.</p>
+    </div>
+    {% endif %}
+  </section>
+
+  <section id="about" class="page-section">
+    <h2>ABOUT US</h2>
+
+    <div class="about-section">
+      <h4>{{ about.title }}</h4>
+      <p class="lead">{{ about.description }}</p>
+    </div>
+
+    <div class="row g-4 mt-4">
+      <div class="col-md-6">
+        <div class="about-card">
+          <h5>Our Mission</h5>
+          <p>{{ about.mission }}</p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="about-card">
+          <h5>Hours of Operation</h5>
+          <ul class="hours-list">
+            {% for day, time in about['hours'] %}
+            <li><strong>{{ day }}:</strong> {{ time }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4 mt-4">
+      <div class="col-md-12">
+        <div class="about-card">
+          <h5>Our Values</h5>
+          <ul class="values-list">
+            {% for value in about['values'] %}
+            <li>{{ value }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" class="page-section">
+    <h2>REVIEWS & TESTIMONIALS</h2>
+    <div class="shop-overview">
+      <div>
+        <strong>{{ overall_stats.average }}/5</strong>
+        <span>Overall rating</span>
+      </div>
+      <div>
+        <strong>{{ overall_stats.count }}</strong>
+        <span>Customer experiences</span>
+      </div>
+      <p>Customers describe the barbershop as clean, reliable, detailed, and easy to book. The reviews highlight sharp haircuts, careful beard work, and barbers who listen before they cut.</p>
+    </div>
+
+    <div class="row g-4 mt-4">
+      <div class="col-md-6">
+        <div class="review-form-section">
+          <h5>Share Your Experience</h5>
+          <form method="post" action="{{ url_for('reviews') }}">
+            <div class="mb-3">
+              <label class="form-label">Your Name</label>
+              <input type="text" class="form-control" name="name" placeholder="John Doe" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">About Which Barber?</label>
+              <select class="form-select" name="barber_id" required>
+                {% for barber in team %}
+                <option value="{{ barber.id }}">{{ barber.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Rating</label>
+              <select class="form-select" name="rating" required>
+                <option value="5">Excellent</option>
+                <option value="4">Very Good</option>
+                <option value="3">Good</option>
+                <option value="2">Fair</option>
+                <option value="1">Poor</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Your Review</label>
+              <textarea class="form-control" name="comment" rows="4" placeholder="Tell us about your experience..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-book w-100">SUBMIT REVIEW</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="reviews-list">
+          <h5>Customer Reviews</h5>
+          {% if reviews %}
+            {% for review in reviews %}
+            <div class="review-item mb-3">
+              <div class="review-header">
+                <strong>{{ review.name }}</strong>
+                <span class="review-rating">
+                  {% for i in range(review.rating) %}★{% endfor %}
+                </span>
+              </div>
+              {% if review.barber_id %}
+                <small class="text-muted">For: {% for b in team %}{% if b.id == review.barber_id %}{{ b.name }}{% endif %}{% endfor %}</small>
+              {% endif %}
+              <p class="review-comment">{{ review.comment }}</p>
+              <small class="review-date text-muted">{{ review.created_at }}</small>
+            </div>
+            {% endfor %}
+          {% else %}
+            <p class="text-muted">No reviews yet. Be the first to share!</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="address" class="page-section">
+    <h2>LOCATION & CONTACT</h2>
+
+    <div class="row g-4 mt-3">
+      <div class="col-md-6">
+        <div class="address-card">
+          <h5>{{ location.name }}</h5>
+          <p class="address">
+            {{ location.street }}<br>
+            {{ location.city }}, {{ location.state }} {{ location.zip }}
+          </p>
+          <div class="contact-info">
+            <p><strong>Phone:</strong> <a href="tel:{{ location.phone }}">{{ location.phone }}</a></p>
+            <p><strong>Email:</strong> <a href="mailto:{{ location.email }}">{{ location.email }}</a></p>
+          </div>
+          <a href="#booking" class="btn btn-book btn-sm">Book Now</a>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="map-container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.2566256750147!2d{{ location.longitude }}!3d{{ location.latitude }}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zClassic%20Cuts%20Barbershop!5e0!3m2!1sen!2sus!4v1234567890" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="booking" class="page-section">
+    <h2>BOOK YOUR CUT</h2>
+    <form method="post" action="{{ url_for('book') }}">
+      <div class="mb-3">
+        <label class="form-label">Full Name</label>
+        <input class="form-control" type="text" name="name" placeholder="John Doe" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Phone</label>
+        <input class="form-control" type="tel" name="phone" placeholder="(555) 123-4567" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Service</label>
+        <select class="form-select" name="service" required>
+          <option value="">Select a service</option>
+          {% for id, label in booking_services %}
+          <option value="{{ id }}">{{ label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Date & Time</label>
+        <input type="datetime-local" class="form-control" name="datetime" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Special Requests</label>
+        <textarea class="form-control" name="notes" placeholder="Any special notes..."></textarea>
+      </div>
+      <button class="btn btn-book w-100" type="submit">CONFIRM BOOKING</button>
+    </form>
+  </section>
+</div>
+<script>
+  (() => {
+    const calendars = {{ availability_calendars|tojson }};
+    let currentMonth = Math.min(4, calendars.length - 1);
+    let selectedKey = null;
+
+    const title = document.getElementById('calendar-title');
+    const weekdays = document.getElementById('calendar-weekdays');
+    const cells = document.getElementById('calendar-cells');
+    const details = document.getElementById('day-availability');
+    const prev = document.getElementById('calendar-prev');
+    const next = document.getElementById('calendar-next');
+
+    const renderDetails = (month, day) => {
+      if (!day || !day.date) {
+        details.innerHTML = '<strong>Select a day</strong><p>Click a date with time slots to see daily availability.</p>';
+        return;
+      }
+
+      const available = day.slots.filter((slot) => slot.status === 'available').length;
+      const occupied = day.slots.filter((slot) => slot.status === 'occupied').length;
+      const slots = day.slots.length
+        ? day.slots.map((slot) => `<span class="detail-slot ${slot.status}">${slot.time} - ${slot.status}</span>`).join('')
+        : '<p>No posted slots for this date yet.</p>';
+
+      details.innerHTML = `
+        <strong>${month.month} ${day.date}</strong>
+        <p>${available} available, ${occupied} occupied</p>
+        <div class="detail-slots">${slots}</div>
+      `;
+    };
+
+    const renderCalendar = () => {
+      const month = calendars[currentMonth];
+      title.textContent = month.month;
+      weekdays.innerHTML = month.weekdays.map((day) => `<span>${day}</span>`).join('');
+      cells.innerHTML = '';
+
+      month.weeks.flat().forEach((day) => {
+        const cell = document.createElement('button');
+        const key = `${month.month}-${day.date}`;
+        const hasSlots = day.slots.length > 0;
+        cell.type = 'button';
+        cell.className = `calendar-cell ${day.date ? '' : 'empty'} ${hasSlots ? 'has-slots' : ''} ${selectedKey === key ? 'selected' : ''}`;
+
+        if (!day.date) {
+          cell.disabled = true;
+          cells.appendChild(cell);
+          return;
+        }
+
+        const chips = day.slots
+          .slice(0, 2)
+          .map((slot) => `<span class="time-chip ${slot.status}">${slot.time}</span>`)
+          .join('');
+        cell.innerHTML = `
+          <span class="calendar-date">${day.date}</span>
+          <span class="calendar-times">${chips}</span>
+        `;
+        cell.addEventListener('click', () => {
+          selectedKey = key;
+          renderDetails(month, day);
+          renderCalendar();
+        });
+        cells.appendChild(cell);
+      });
+
+      prev.disabled = currentMonth === 0;
+      next.disabled = currentMonth === calendars.length - 1;
+    };
+
+    prev.addEventListener('click', () => {
+      currentMonth = Math.max(0, currentMonth - 1);
+      selectedKey = null;
+      renderDetails();
+      renderCalendar();
+    });
+
+    next.addEventListener('click', () => {
+      currentMonth = Math.min(calendars.length - 1, currentMonth + 1);
+      selectedKey = null;
+      renderDetails();
+      renderCalendar();
+    });
+
+    renderCalendar();
+  })();
+</script>
+{% endblock %}

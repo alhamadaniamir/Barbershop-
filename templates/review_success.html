@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center py-5">
+  <h2 style="color: #e0e7ff; border: none; margin-bottom: 1rem;">✓ THANK YOU</h2>
+  <div class="alert alert-success">
+    Thank you, <strong>{{ name }}</strong>. Your review has been posted successfully!
+  </div>
+  <p><a href="{{ url_for('reviews') }}" class="btn btn-outline-secondary">Back to Reviews</a></p>
+</div>
+{% endblock %}

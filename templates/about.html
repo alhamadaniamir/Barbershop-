@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>ABOUT US</h2>
+
+<div class="about-section">
+  <h4>{{ about.title }}</h4>
+  <p class="lead">{{ about.description }}</p>
+</div>
+
+<div class="row g-4 mt-4">
+  <div class="col-md-6">
+    <div class="about-card">
+      <h5>Our Mission</h5>
+      <p>{{ about.mission }}</p>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="about-card">
+      <h5>Hours of Operation</h5>
+      <ul class="hours-list">
+        {% for day, time in about['hours'] %}
+        <li>
+          <strong>{{ day }}:</strong> {{ time }}
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4 mt-4">
+  <div class="col-md-12">
+    <div class="about-card">
+      <h5>Our Values</h5>
+      <ul class="values-list">
+        {% for value in about['values'] %}
+        <li>{{ value }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

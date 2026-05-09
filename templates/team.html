@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>OUR TEAM</h2>
+<p class="text-muted mb-4">Meet the masters behind every cut</p>
+
+<div class="row g-4">
+  {% for member in team %}
+  <div class="col-md-6">
+    <div class="team-card">
+      <div class="team-header">
+        <h5>{{ member.name }}</h5>
+        <span class="team-role">{{ member.role }}</span>
+      </div>
+      <p class="team-bio">{{ member.bio }}</p>
+      
+      <div class="team-info">
+        <div class="info-row">
+          <strong>Email:</strong> <a href="mailto:{{ member.email }}">{{ member.email }}</a>
+        </div>
+        <div class="info-row">
+          <strong>Phone:</strong> <a href="tel:{{ member.phone }}">{{ member.phone }}</a>
+        </div>
+      </div>
+
+      <div class="team-booking">
+        <strong>Booking Policy:</strong>
+        <p>{{ member.booking_policy }}</p>
+      </div>
+
+      {% if member.social %}
+      <div class="team-social">
+        <strong>Follow:</strong>
+        <div class="social-links">
+          {% if member.social.instagram %}
+          <a href="{{ member.social.instagram }}" target="_blank" class="social-link">Instagram</a>
+          {% endif %}
+          {% if member.social.facebook %}
+          <a href="{{ member.social.facebook }}" target="_blank" class="social-link">Facebook</a>
+          {% endif %}
+          {% if member.social.tiktok %}
+          <a href="{{ member.social.tiktok }}" target="_blank" class="social-link">TikTok</a>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+
+      <a href="{{ url_for('book') }}" class="btn btn-book btn-sm mt-3">Book with {{ member.name }}</a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

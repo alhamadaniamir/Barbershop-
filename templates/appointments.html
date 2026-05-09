@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>APPOINTMENTS</h2>
+{% if appointments %}
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Service</th>
+        <th>Date & Time</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for a in appointments %}
+      <tr>
+        <td>{{ a.name }}</td>
+        <td>{{ a.phone }}</td>
+        <td>{{ a.service }}</td>
+        <td>{{ a.datetime }}</td>
+        <td>{{ a.notes or '—' }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% else %}
+<p class="text-center mt-5 text-muted">No appointments yet.</p>
+{% endif %}
+{% endblock %}

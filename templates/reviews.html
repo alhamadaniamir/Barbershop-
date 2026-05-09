@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>REVIEWS & TESTIMONIALS</h2>
+
+<div class="row g-4 mt-4">
+  <div class="col-md-6">
+    <div class="review-form-section">
+      <h5>Share Your Experience</h5>
+      <form method="post">
+        <div class="mb-3">
+          <label class="form-label">Your Name</label>
+          <input type="text" class="form-control" name="name" placeholder="John Doe" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">About Which Barber?</label>
+          <select class="form-select" name="barber_id" required>
+            {% for barber in team %}
+            <option value="{{ barber.id }}">{{ barber.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Rating</label>
+          <select class="form-select" name="rating" required>
+            <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+            <option value="4">⭐⭐⭐⭐ Very Good</option>
+            <option value="3">⭐⭐⭐ Good</option>
+            <option value="2">⭐⭐ Fair</option>
+            <option value="1">⭐ Poor</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Your Review</label>
+          <textarea class="form-control" name="comment" rows="4" placeholder="Tell us about your experience..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-book w-100">SUBMIT REVIEW</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="reviews-list">
+      <h5>Customer Reviews</h5>
+      {% if reviews %}
+        {% for review in reviews %}
+        <div class="review-item mb-3">
+          <div class="review-header">
+            <strong>{{ review.name }}</strong>
+            <span class="review-rating">
+              {% for i in range(review.rating) %}⭐{% endfor %}
+            </span>
+          </div>
+          {% if review.barber_id %}
+            <small class="text-muted">For: {% for b in team %}{% if b.id == review.barber_id %}{{ b.name }}{% endif %}{% endfor %}</small>
+          {% endif %}
+          <p class="review-comment">{{ review.comment }}</p>
+          <small class="review-date text-muted">{{ review.created_at }}</small>
+        </div>
+        {% endfor %}
+      {% else %}
+        <p class="text-muted">No reviews yet. Be the first to share!</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

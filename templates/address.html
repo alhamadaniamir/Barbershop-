@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>LOCATION & CONTACT</h2>
+
+<div class="row g-4 mt-3">
+  <div class="col-md-6">
+    <div class="address-card">
+      <h5>{{ location.name }}</h5>
+      <p class="address">
+        {{ location.street }}<br>
+        {{ location.city }}, {{ location.state }} {{ location.zip }}
+      </p>
+      <div class="contact-info">
+        <p>
+          <strong>Phone:</strong> <a href="tel:{{ location.phone }}">{{ location.phone }}</a>
+        </p>
+        <p>
+          <strong>Email:</strong> <a href="mailto:{{ location.email }}">{{ location.email }}</a>
+        </p>
+      </div>
+      <a href="{{ url_for('book') }}" class="btn btn-book btn-sm">Book Now</a>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.2566256750147!2d{{ location.longitude }}!3d{{ location.latitude }}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zClassic%20Cuts%20Barbershop!5e0!3m2!1sen!2sus!4v1234567890" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</div>
+{% endblock %}
